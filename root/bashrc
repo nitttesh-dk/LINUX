@@ -1,0 +1,103 @@
+
+# .bashrc
+
+# Source global definitions if available
+if [ -f /etc/bashrc ]; then
+  . /etc/bashrc
+fi
+
+
+
+
+# fore opening vs code directly from terminal 
+alias code='/mnt/c/Users/NITESH-DK/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
+alias code-i='/mnt/c/Users/NITESH-DK/AppData/Local/Programs/Microsoft\ VS\ Code\ Insiders/bin/code-insiders'
+
+
+# User-specific environment setup
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+  PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# User-specific aliases and functions
+alias rm='rm -i'  # Prompt before removing files
+alias cp='cp -i'  # Prompt before copying files
+alias mv='mv -i'  # Prompt before moving files
+
+# Initialize Oh My Posh with a custom theme
+eval "$(oh-my-posh init bash --config ~/.cache/oh-my-posh/themes/the-unnamed.omp.json)"
+# eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/the-unnamed.omp.json)"
+
+# Initialize fzf with bash completion
+eval "$(fzf --bash)"
+
+# Alias for 'ls' using eza with custom options
+alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+
+# fzf configuration for file and directory previews
+show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
+
+# fzf options for different commands
+export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+
+# Advanced fzf customization
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
+    export|unset) fzf --preview "eval 'echo ${}'"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
+  esac
+}
+
+
+# ---- LANGUAGES CONFIGURATION ----
+
+# Color codes for output messages
+RED='\033[0;31m'      # Red color
+VIOLET='\033[0;35m'   # Violet (dark purple) color
+BLUE='\033[0;34m'     # Blue color
+PINK='\033[1;35m'     # Pink color
+NC='\033[0m'          # No color (reset)
+
+# General function to run any command with nodemon and print a message
+# function run() {
+#   echo -e "${BLUE}Running $@ on ADMIN${NC}"
+#   nodemon --exec ~/.run_with_clear.sh "$@"
+# }
+
+# Function to run Python scripts with nodemon
+function runpy() {
+  nodemon --exec "$HOME/.run_with_clear.sh" -- "${PINK}Python script is running on ADMIN${NC}" python "$@"
+}
+
+# Function to run Node.js scripts with nodemon
+function runjs() {
+  nodemon --exec "$HOME/.run_with_clear.sh" -- "${RED}JS script is running on ADMIN${NC}" node "$@"
+}
+
+# Function to compile and run Java programs with nodemon
+function runjava() {
+  nodemon --exec "$HOME/.run_with_clear.sh" -- "${VIOLET}Java program is running on ADMIN${NC}" java "$1"
+}
+
+# Function to compile and run C++ programs with nodemon
+function runcpp() {
+  nodemon --ext cpp --exec "$HOME/.run_with_clear.sh" -- "${BLUE}C++ program is running on ADMIN${NC}" "g++ $1 -o ${1%.cpp} && ./${1%.cpp}"
+}
+
+# Import all scripts from /root/.scripts
+for script in /root/.scripts/*.sh; do
+  if [[ -f "$script" ]]; then
+    source "$script"
+  fi
+done
+
+
+
+
