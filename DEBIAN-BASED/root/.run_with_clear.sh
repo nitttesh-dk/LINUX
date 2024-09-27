@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Check if a message was provided
 if [ "$#" -lt 2 ]; then

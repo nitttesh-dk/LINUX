@@ -1,5 +1,0 @@
-alias admin='cd /mnt/d/LNX-NITESH-DK'
-alias desk='cd /mnt/d/USER/Desktop/'
-alias scripts='cd ~/.scripts/'
-alias mbash='micro ~/.bashrc'
-alias sbash='source ~/.bashrc'
