@@ -1,0 +1,96 @@
+[
+    // Markdown Commands
+    {
+        "key": "ctrl+shift+m",
+        "command": "markdown.showPreviewToSide",
+        "when": "!notebookEditorFocused && editorLangId == 'markdown'"
+    },
+
+    // Pets View Command
+    {
+        "key": "ctrl+alt+numpad5",
+        "command": "petsView.focus"
+    },
+
+    // Terminal Focus No Operations
+    {
+        "key": "ctrl+e",
+        "command": "noop",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "noop",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "noop",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+g",
+        "command": "noop",
+        "when": "terminalFocus"
+    },
+
+    // Cursor Navigation
+    {
+        "key": "ctrl+alt+right",
+        "command": "cursorEnd"
+    },
+    {
+        "key": "ctrl+alt+left",
+        "command": "cursorHome"
+    },
+
+    // File Utility Commands
+    {
+        "key": "alt+r",
+        "command": "fileutils.renameFile" // Rename file
+    },
+    {
+        "key": "alt+f",
+        "command": "fileutils.newFolder" // Create a new folder
+    },
+    {
+        "key": "alt+n",
+        "command": "extension.advancedNewFile" // Create a new file
+    },
+    {
+        "key": "alt+c",
+        "command": "fileutils.copyFileName" // Copy the file name
+    },
+    {
+        "key": "alt+d",
+        "command": "fileutils.duplicate" // Duplicate the selected file
+    },
+    {
+        "key": "alt+shift+d",
+        "command": "fileutils.removeFile" // Delete a file
+    },
+    {
+        "key": "alt+shift+m",
+        "command": "fileutils.move" // Move the selected file
+    },
+    {
+        "key": "alt+shift+n",
+        "command": "fileutils.newFileAtRoot" // Create a new file at the root
+    },
+    {
+        "key": "alt+shift+f",
+        "command": "fileutils.newFolderAtRoot" // Create a new folder at the root
+    },
+    {
+        "key": "alt+w",
+        "command": "remote-wsl.connect"
+    },
+    {
+        "key": "ctrl+shift+z",
+        "command": "codegeex.askcodegeex"
+    },
+    {
+        "key": "ctrl+alt+end",
+        "command": "workbench.action.toggleActivityBarVisibility"
+    }
+]
